@@ -11,7 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.aoyama.atc.myfriend.SignUpActivity"
     android:background="@drawable/bg7">
-
     <TextView
         android:text="@string/signUp"
         android:layout_width="wrap_content"
@@ -21,14 +20,12 @@
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/holo_orange_light" />
-
     <Button
         android:text="@string/signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
         android:layout_alignParentBottom="true" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -38,19 +35,16 @@
         android:layout_margin="15dp"
         android:padding="15dp"
         android:background="#5c000000">
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/no_image"
                 android:id="@+id/imageView" />
-
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -58,13 +52,11 @@
                 android:id="@+id/imageView2"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +66,6 @@
                 android:hint="Name :"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/holo_orange_light" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +75,6 @@
                 android:hint="User :"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/holo_orange_light" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
