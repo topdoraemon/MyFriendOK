@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                     uploadImageToServer();
 
+                    //upload String to server
+                    uploadStringToServer();
+
 
                 }
 
@@ -108,7 +112,31 @@ public class SignUpActivity extends AppCompatActivity {
 
     } //Main Method
 
-// Class Method
+    private void uploadStringToServer() {
+        try {
+            String strURL="http://swiftcodingthai.com/20nov/add_user_naitop.php";
+            AddUserToServer addUserToServer = new AddUserToServer(
+                    SignUpActivity.this,
+                    nameString,
+                    userString,
+                    passwordString,
+                    "http://swiftcodingthai.com/20nov/Image"+imageNameString);
+            addUserToServer.execute(strURL);
+            boolean bolResult = Boolean.parseBoolean(addUserToServer.get());
+            Log.d("20NovV2", "Result==>" + bolResult);
+
+            if (bolResult) {
+                finish();
+            } else {
+                Toast.makeText(SignUpActivity.this,"Upoad False",Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.d("20NovV2", "e StringToserver==>" + e.toString());
+        }
+
+    }
+
+    // Class Method
     private void uploadImageToServer() {
         //Change Policy
         StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy
@@ -129,6 +157,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Log.d("20NovV1", "e SimpleFTP ==>" + e.toString());
+
         }
 
     }//Upload Image
