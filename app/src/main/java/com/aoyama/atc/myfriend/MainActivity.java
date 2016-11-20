@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -16,6 +17,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class MainActivity extends AppCompatActivity {
     // Explicit
     private Button signInButton, signUpButton; //ประกาศตัวแปร
+    private EditText userEditText, passwordEditText;
+    private String userString,passwordString;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -31,6 +35,34 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = (Button) findViewById(R.id.button);
         signUpButton = (Button) findViewById(R.id.button2);
+        userEditText = (EditText) findViewById(R.id.editText4);
+        passwordEditText = (EditText) findViewById(R.id.editText5);
+
+        //SignIn Controller
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Get Value
+                userString = userEditText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
+
+                //check space
+                if ((userString.length()==0)||(passwordString.length()==0)) {
+                    MyAlert myAlert = new MyAlert(MainActivity.this,
+                            R.drawable.kon48, "ข้อมูลว่าง", "กรุณากรอก Username และ Password");
+                    myAlert.myDialog();
+
+                } else {
+                    //authen
+                    chekUserPassword();
+                }
+
+
+            }//On Click
+        });
+
+
 
         //signup control
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }// Main Method
+
+    private void chekUserPassword() {
+
+    }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
