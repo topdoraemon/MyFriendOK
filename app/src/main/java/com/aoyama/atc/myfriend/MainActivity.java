@@ -2,8 +2,10 @@ package com.aoyama.atc.myfriend;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     // Explicit
@@ -80,7 +85,50 @@ public class MainActivity extends AppCompatActivity {
     }// Main Method
 
     private void chekUserPassword() {
+        String strResult = null, strTruePassword = null;
+        boolean bolStatus = true;
 
+
+        try {
+
+            GetUser getUser = new GetUser(MainActivity.this);
+            getUser.execute();
+            strResult = getUser.get();
+            Log.d("20NovV3", "strResult ==>" + strResult);
+
+            JSONArray jsonArray = new JSONArray(strResult);
+
+
+            for (int i=0;i<jsonArray.length();i++ ) {
+
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (userString.equals(jsonObject.getString("User"))) {
+                    bolStatus = false;
+                    strTruePassword = jsonObject.getString("Password");
+                }
+
+
+
+            }//for
+            if (bolStatus) {
+                MyAlert myAlert = new MyAlert(MainActivity.this,
+                        R.drawable.rat48, "User False", "No this User in my Database");
+                myAlert.myDialog();
+
+            } else if (passwordString.equals(strTruePassword)) {
+                startActivity(new Intent(MainActivity.this, FriendListView.class));
+
+
+            } else {
+                MyAlert myAlert = new MyAlert(MainActivity.this,
+                        R.drawable.rat48, "Password False", "Please Typ Again");
+                myAlert.myDialog();
+
+            }
+
+        } catch (Exception e) {
+            Log.d("20NovV3","e CheckUser==>" + e.toString());
+        }
     }
 
     /**
